@@ -165,29 +165,24 @@ Use the scoreboard function below to do the following:
 function scoreboard(getInningScore, inning, number) {
   const report = [];
   // const totalScore = [];
-  let homeScore = 0;
-  let awayScore = 0;
+  // const totalScore = {
+  //   Home: 0,
+  //   Away: 0
+  // };
+  let totalHomeScore = 0;
+  let totalAwayScore = 0;
   for (let i = 0; i < number; i++) {
-    homeScore = getInningScore(inning).Home; 
-    awayScore = getInningScore(inning).Away;
-    report.push(`Inning ${i + 1}: Away ${homeScore} - Home ${awayScore}`);
-    // let currentScore = getInningScore(inning);
-    // homeScore = homeScore + currentScore.Home;
-    // awayScore = awayScore + currentScore.Away;
-    // totalScore.push
+    const score = getInningScore(inning);
+    report.push(`Inning ${i + 1}: Away ${score.Away} - Home ${score.Home}`);
+    totalHomeScore = totalHomeScore + score.Home;
+    totalAwayScore = totalAwayScore + score.Away;
   }
-  
-  // combined homeScore /awayScore = sum of elements from report array
-  //how to get it? 
-  
 
-
-
-  // if (awayScore === homeScore){
-  //   return `This game will require extra innings: Away ${awayScore} - Home ${homeScore}`
-  // } else {
-  //   return `Final Score: Away ${awayScore} - Home ${homeScore}`
-  // }
+  if (totalHomeScore === totalAwayScore){
+    report.push(`This game will require extra innings: Away ${totalAwayScore} - Home ${totalHomeScore}`);
+  } else {
+    report.push(`Final Score: Away ${totalAwayScore} - Home ${totalHomeScore}`);
+  }
   return report;
 }
 
